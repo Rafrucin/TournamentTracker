@@ -12,7 +12,7 @@ using TrackerLibrary.Models;
 
 namespace TrackerUI
 {
-    public partial class CreateTournamentForm : Form
+    public partial class CreateTournamentForm : Form, IPrizeRequester, ITeamRequester
     {
         List<TeamModel> availableTeams = GlobalConfig.Connection.GetTeam_All();
         List<TeamModel> selectedTeams = new List<TeamModel>();
@@ -36,7 +36,7 @@ namespace TrackerUI
 
             prizesListBox.DataSource = null;
             prizesListBox.DataSource = availablePrizes;
-            prizesListBox.DisplayMember = "PrizeName";
+            prizesListBox.DisplayMember = "PlaceName";
         }
 
         private void teamOneScoreValue_TextChanged(object sender, EventArgs e)
@@ -56,15 +56,6 @@ namespace TrackerUI
 
         private void addTeamButton_Click(object sender, EventArgs e)
         {
-            // PersonModel p = (PersonModel)selectTeamMemberDropDown.SelectedItem;
-
-            //if (p!=null)
-            //{
-            //    availableTeamMembers.Remove(p);
-            //    selectedTeamMembers.Add(p);
-
-            //    WireUpList(); 
-            //}
             TeamModel t = (TeamModel)selectTeamDropDown.SelectedItem;
             if (t != null)
             {
@@ -84,6 +75,34 @@ namespace TrackerUI
                 selectedTeams.Remove(t);
                 WireUpList();
             }
+        }
+
+        private void createPrizeButton_Click(object sender, EventArgs e)
+        {
+            // call createprizeform
+            CreatePrizeForm frm = new CreatePrizeForm(this);
+            frm.Show();                     
+
+            
+        }
+
+        public void PrizeComplete(PrizeModel model)
+        {
+            // get the prize model from form
+            availablePrizes.Add(model);
+            WireUpList();
+        }
+
+        public void TeamComplete(TeamModel model)
+        {
+            selectedTeams.Add(model);
+            WireUpList();
+        }
+
+        private void addNewTeamLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            CreateTeamForm frm = new CreateTeamForm(this);
+            frm.Show();
         }
     }
 }
