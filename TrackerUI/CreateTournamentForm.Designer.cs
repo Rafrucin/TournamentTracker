@@ -176,12 +176,13 @@
             this.deleteSelectedPrizeButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.deleteSelectedPrizeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.deleteSelectedPrizeButton.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.deleteSelectedPrizeButton.Location = new System.Drawing.Point(542, 265);
+            this.deleteSelectedPrizeButton.Location = new System.Drawing.Point(670, 301);
             this.deleteSelectedPrizeButton.Name = "deleteSelectedPrizeButton";
-            this.deleteSelectedPrizeButton.Size = new System.Drawing.Size(122, 32);
+            this.deleteSelectedPrizeButton.Size = new System.Drawing.Size(122, 58);
             this.deleteSelectedPrizeButton.TabIndex = 23;
-            this.deleteSelectedPrizeButton.Text = "Delete Selected";
+            this.deleteSelectedPrizeButton.Text = "Remove Selected";
             this.deleteSelectedPrizeButton.UseVisualStyleBackColor = true;
+            this.deleteSelectedPrizeButton.Click += new System.EventHandler(this.deleteSelectedPrizeButton_Click);
             // 
             // prizesLabel
             // 
@@ -209,9 +210,9 @@
             this.removeSelectedTeamButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.removeSelectedTeamButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.removeSelectedTeamButton.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
-            this.removeSelectedTeamButton.Location = new System.Drawing.Point(542, 45);
+            this.removeSelectedTeamButton.Location = new System.Drawing.Point(670, 81);
             this.removeSelectedTeamButton.Name = "removeSelectedTeamButton";
-            this.removeSelectedTeamButton.Size = new System.Drawing.Size(122, 32);
+            this.removeSelectedTeamButton.Size = new System.Drawing.Size(122, 54);
             this.removeSelectedTeamButton.TabIndex = 24;
             this.removeSelectedTeamButton.Text = "Remove Selected";
             this.removeSelectedTeamButton.UseVisualStyleBackColor = true;
@@ -224,7 +225,7 @@
             this.CreateTournamentButton.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.CreateTournamentButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CreateTournamentButton.Font = new System.Drawing.Font("Segoe UI Semibold", 18F, System.Drawing.FontStyle.Bold);
-            this.CreateTournamentButton.Location = new System.Drawing.Point(164, 459);
+            this.CreateTournamentButton.Location = new System.Drawing.Point(249, 459);
             this.CreateTournamentButton.Name = "CreateTournamentButton";
             this.CreateTournamentButton.Size = new System.Drawing.Size(354, 45);
             this.CreateTournamentButton.TabIndex = 25;
@@ -237,7 +238,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 30F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.ClientSize = new System.Drawing.Size(702, 516);
+            this.ClientSize = new System.Drawing.Size(823, 516);
             this.Controls.Add(this.CreateTournamentButton);
             this.Controls.Add(this.removeSelectedTeamButton);
             this.Controls.Add(this.deleteSelectedPrizeButton);

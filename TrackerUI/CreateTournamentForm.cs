@@ -44,13 +44,21 @@ namespace TrackerUI
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void CreateTournamentButton_Click(object sender, EventArgs e)
         {
+            decimal fee = 0;
+            bool acceptablefee = decimal.TryParse(entryFeeValue.Text, out fee);
+
+            if (!acceptablefee)
+            {
+                MessageBox.Show("You need to entre a valid Entry Fee", "Invalid Fee", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+            TounamentModel tm = new TounamentModel();
+            tm.TournamentName = tournamentNameValue.Text;
+            tm.TeamEntered = selectedTeams;
+            tm.Prizes = availablePrizes;
+            tm.EntryFee = 0;
 
         }
 
@@ -103,6 +111,16 @@ namespace TrackerUI
         {
             CreateTeamForm frm = new CreateTeamForm(this);
             frm.Show();
+        }
+
+        private void deleteSelectedPrizeButton_Click(object sender, EventArgs e)
+        {
+            PrizeModel p = (PrizeModel)prizesListBox.SelectedItem;
+            if (p != null)
+            {
+                availablePrizes.Remove(p);
+                WireUpList();
+            }
         }
     }
 }
