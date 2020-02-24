@@ -96,9 +96,12 @@
     <Compile Include="DataAccess\SqlConnector.cs" />
     <Compile Include="Models\TeamModel.cs" />
     <Compile Include="DataAccess\TextConnector.cs" />
-    <Compile Include="Models\TounamentModel.cs" />
+    <Compile Include="Models\TournamentModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\.editorconfig">
+      <Link>.editorconfig</Link>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

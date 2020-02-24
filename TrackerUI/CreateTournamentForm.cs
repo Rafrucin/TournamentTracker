@@ -51,14 +51,18 @@ namespace TrackerUI
 
             if (!acceptablefee)
             {
-                MessageBox.Show("You need to entre a valid Entry Fee", "Invalid Fee", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("You need to entre a valid Entry Fee",
+                    "Invalid Fee", 
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             
-            TounamentModel tm = new TounamentModel();
+            TournamentModel tm = new TournamentModel();
             tm.TournamentName = tournamentNameValue.Text;
-            tm.TeamEntered = selectedTeams;
+            tm.EntryFee = fee;
             tm.Prizes = availablePrizes;
-            tm.EntryFee = 0;
+            tm.TeamEntered = selectedTeams;
+            GlobalConfig.Connection.CreateTournament(tm);
 
         }
 
