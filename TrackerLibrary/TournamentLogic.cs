@@ -16,7 +16,7 @@ namespace TrackerLibrary
             int byes = NumberOfByes(rounds, randomizedTeams.Count);
             model.Rounds.Add(CreateFirstRound(byes, randomizedTeams));
             CreateOtherRounds(model, rounds);
-            // todo 13:46
+            // todo 17.37
 
         }
 
@@ -55,7 +55,7 @@ namespace TrackerLibrary
             foreach (TeamModel team in teams)
             {
                 curr.Entries.Add(new MatchupEntryModel { TeamCompiting = team });
-                if (byes>0 || curr.Entries.Count>1)
+                if (byes > 0 || curr.Entries.Count>1)
                 {
                     curr.MatchupRound = 1;
                     output.Add(curr);
@@ -73,20 +73,21 @@ namespace TrackerLibrary
         private static int NumberOfByes (int rounds, int numberOfTeams)
         {
             int output = 0;
-            int totalTeams = 0;
+            int totalTeams = 1;
 
             for (int i = 1; i <= rounds; i++)
             {
                 totalTeams *= 2;
             }
 
-            return totalTeams - numberOfTeams;
+            output = totalTeams - numberOfTeams;
+            return output;
 
         }
 
         private static int FindNuberOfRounds (int teamCount)
         {
-            int output = 0;
+            int output = 1;
             int val = 2;
 
             while (val<teamCount)
