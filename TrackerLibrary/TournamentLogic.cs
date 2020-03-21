@@ -16,7 +16,7 @@ namespace TrackerLibrary
             int byes = NumberOfByes(rounds, randomizedTeams.Count);
             model.Rounds.Add(CreateFirstRound(byes, randomizedTeams));
             CreateOtherRounds(model, rounds);
-            // todo 17.37
+            // todo 19.37
 
         }
 
