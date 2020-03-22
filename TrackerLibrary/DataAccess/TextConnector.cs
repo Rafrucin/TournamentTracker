@@ -9,19 +9,11 @@ using TrackerLibrary.DataAccess.TextHelpers;
 namespace TrackerLibrary.DataAccess
 {
     
-    
     public class TextConnector : IDataConnection
-    {
-        private const string PrizesFile = "PrizeModels.csv";
-        private const string PeopleFile = "PersonModels.csv";
-        private const string TeamFile = "TeamModels.csv";
-        private const string TournamentFile = "TournamentModels.csv";
-        private const string MatchupFile = "MatchupModels.csv";
-        private const string MatchupEntryFile = "MatchupEntryModels.csv";
-
-        public PersonModel CreatePerson(PersonModel model)
+    {        
+        public void CreatePerson(PersonModel model)
         {
-            List<PersonModel> people = PeopleFile.FullFilePath().LoadFile().ConvertToPersonModel();
+            List<PersonModel> people = GlobalConfig.PeopleFile.FullFilePath().LoadFile().ConvertToPersonModel();
 
 
             int currentId = 1;
@@ -34,14 +26,13 @@ namespace TrackerLibrary.DataAccess
 
             people.Add(model);
 
-            people.SaveToPeopleFile(PeopleFile);
+            people.SaveToPeopleFile();
 
-            return model;
         }
 
-        public PrizeModel CreatePrize(PrizeModel model)
+        public void CreatePrize(PrizeModel model)
         {            
-            List<PrizeModel> prizes = PrizesFile.FullFilePath().LoadFile().ConvertToPrizeModel();
+            List<PrizeModel> prizes = GlobalConfig.PrizesFile.FullFilePath().LoadFile().ConvertToPrizeModel();
 
 
             int currentId = 1;
@@ -54,19 +45,17 @@ namespace TrackerLibrary.DataAccess
 
             prizes.Add(model);
 
-            prizes.SaveToPrizeFile(PrizesFile);
-
-            return model;
+            prizes.SaveToPrizeFile();
         }
 
         public List<PersonModel> GetPerson_All()
         {
-            return PeopleFile.FullFilePath().LoadFile().ConvertToPersonModel();
+            return GlobalConfig.PeopleFile.FullFilePath().LoadFile().ConvertToPersonModel();
         }
         
-        public TeamModel CreateTeam(TeamModel model)
+        public void CreateTeam(TeamModel model)
         {
-            List<TeamModel> teams = TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);
+            List<TeamModel> teams = GlobalConfig.TeamFile.FullFilePath().LoadFile().ConvertToTeamModels();
 
             int currentId = 1;
 
@@ -78,20 +67,17 @@ namespace TrackerLibrary.DataAccess
 
             teams.Add(model);
 
-            teams.SaveToTeamFile(TeamFile);
-
-            return model;
-
+            teams.SaveToTeamFile();
         }
 
         public List<TeamModel> GetTeam_All()
         {
-            return TeamFile.FullFilePath().LoadFile().ConvertToTeamModels(PeopleFile);
+            return GlobalConfig.TeamFile.FullFilePath().LoadFile().ConvertToTeamModels();
         }
 
         public void CreateTournament(TournamentModel model)
         {
-            List<TournamentModel> tournaments = TournamentFile.FullFilePath().LoadFile().ConvertToTournamentModels(TeamFile, PeopleFile, PrizesFile);
+            List<TournamentModel> tournaments = GlobalConfig.TournamentFile.FullFilePath().LoadFile().ConvertToTournamentModels();
             
             int currentId = 1;
             if (tournaments.Count > 0)
@@ -100,19 +86,18 @@ namespace TrackerLibrary.DataAccess
             }
             model.Id = currentId;
 
-            model.SaveRoundsToFiles(MatchupFile, MatchupEntryFile);
+            model.SaveRoundsToFiles();
 
             tournaments.Add(model);
 
-            tournaments.SaveToTournamentFile(TournamentFile);
+            tournaments.SaveToTournamentFile();
 
-            
+            TournamentLogic.UpdateTournamentResults(model);
         }
 
         public List<TournamentModel> GetTournament_All()
         {
-            return TournamentFile.FullFilePath().LoadFile().ConvertToTournamentModels(TeamFile, PeopleFile, PrizesFile);
-
+            return GlobalConfig.TournamentFile.FullFilePath().LoadFile().ConvertToTournamentModels();
         }
 
         public void UpdateMatchup(MatchupModel model)
