@@ -8,11 +8,17 @@ namespace TrackerLibrary.Models
 {
     public class TournamentModel
     {
+        public event EventHandler<DateTime> OnTournamentComplete;
         public int Id { get; set; }
         public string TournamentName { get; set; }
         public decimal EntryFee { get; set; }
         public List<TeamModel> TeamEntered { get; set; } = new List<TeamModel>();
         public List<List<MatchupModel>> Rounds { get; set; } = new List<List<MatchupModel>>();
         public List<PrizeModel> Prizes { get; set; } = new List<PrizeModel>();
+
+        public void CompletTournament()
+        {
+            OnTournamentComplete?.Invoke(this, DateTime.Now);
+        }
     }
 }
